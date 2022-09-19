@@ -5,3 +5,6 @@ Rails.application.routes.draw do
   # root "articles#index"
   get '/hello', to: 'application#hello_world'
 end
+
+
+# hello hello hello
