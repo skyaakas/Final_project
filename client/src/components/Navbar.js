@@ -15,7 +15,7 @@ function Navbar({authenticated, setAuthenticated}) {
   return (
     <div className='overflow-hidden text-ellipsis flex'>
             <button onClick={()=>{history.push('/')}}>Home</button>
-            <button>News</button>
+            <button onClick={()=>{history.push('/rental')}}>Rental</button>
             {/* <button onClick={()=>{history.push('/login')}}>Login</button> */}
             {/* <button onClick={()=>{history.push('/signup')}}>Signup</button> */}
             {authenticated===true ? (<div><button onClick={handleLogOut}>Logout</button>

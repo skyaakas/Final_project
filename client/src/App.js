@@ -6,6 +6,7 @@ import Login from "./components/Login.js";
 import Home from "./components/Home.js";
 import Footer from "./components/Footer.js";
 import Rental from "./components/Rental.js";
+import RentalDetail from "./components/RentalDetail.js";
 import  "./index.css"
 import "./style/Footer.css"
 
@@ -40,8 +41,11 @@ function App() {
           <Route path="/testing">
             <h1>Test Route</h1>
           </Route>
-          <Route path="/rentals">
+          <Route path="/rental">
             <Rental/>
+          </Route>
+          <Route path="/rentals/:id">
+            <RentalDetail/>
           </Route>
           <Route path="/signup">
             <Signup/>
