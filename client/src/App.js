@@ -4,7 +4,10 @@ import Signup from "./components/Signup.js";
 import Navbar from "./components/Navbar.js";
 import Login from "./components/Login.js";
 import Home from "./components/Home.js";
+import Footer from "./components/Footer.js";
+import Rental from "./components/Rental.js";
 import  "./index.css"
+import "./style/Footer.css"
 
 function App() {
   const [count, setCount] = useState(0);
@@ -37,6 +40,9 @@ function App() {
           <Route path="/testing">
             <h1>Test Route</h1>
           </Route>
+          <Route path="/rentals">
+            <Rental/>
+          </Route>
           <Route path="/signup">
             <Signup/>
           </Route>
@@ -48,6 +54,7 @@ function App() {
             {/* <h1>Page Count: {count}</h1> */}
           </Route>
         </Switch>
+        <Footer/>
       </div>
     </BrowserRouter>
   );
