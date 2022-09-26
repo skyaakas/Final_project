@@ -12,7 +12,7 @@ function Rental() {
     }, [])
     const allRentals = rental.map((rental)=>{
         return(
-            <RentalCard rental={rental}/>
+            <RentalCard rental={rental} key={rental.id}/>
         )
     })
   return (
