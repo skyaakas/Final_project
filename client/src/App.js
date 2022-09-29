@@ -1,20 +1,26 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Signup from "./components/Signup.js";
-import Navbar from "./components/Navbar.js";
+import Navigation from "./components/Navigation.js";
 import Login from "./components/Login.js";
 import Home from "./components/Home.js";
-import Footer from "./components/Footer.js";
 import Rental from "./components/Rental.js";
 import RentalDetail from "./components/RentalDetail.js";
+import Booking from "./components/Booking.js";
 import  "./index.css"
 import "./style/Footer.css"
+import MyRental from "./components/MyRental.js";
+import Foot from "./components/Foot.js";
+import UserBooking from "./components/UserBooking.js";
 
 function App() {
   const [count, setCount] = useState(0);
   
   const [currentUser, setCurrentUser] = useState(null)
   const [authenticated, setAuthenticated] = useState(false)
+  const [rental, setRental] = useState({})
+  const [bookings, setBookings] = useState({})
+  const[userRentals, setUserRentals] = useState([])
 
   // useEffect(() => {
   //   fetch("/hello")
@@ -27,15 +33,23 @@ function App() {
         res.json().then((user) => {
           setCurrentUser(user);
           setAuthenticated(true);
+          setUserRentals(user.rentals);
         });
       }
     });
   }, []);
+  const allUserRentals = userRentals.map((userRentals)=>{
+    return(
+        <UserBooking userRentals={userRentals} key={userRentals.id}/>
+    )
+})
+  
+  
 
   return (
     <BrowserRouter>
       <div className="App">
-      <Navbar authenticated= {authenticated} setAuthenticated={setAuthenticated} currentUser={currentUser}/>
+      <Navigation authenticated= {authenticated} setAuthenticated={setAuthenticated} currentUser={currentUser}/>
             
         <Switch>
           <Route path="/testing">
@@ -44,11 +58,20 @@ function App() {
           <Route path="/rental">
             <Rental/>
           </Route>
+          <Route path="/myBookings">
+            {allUserRentals}
+          </Route>
+          <Route path="/bookings">
+            <Booking currentUser={currentUser} authenticated={authenticated} rental={rental}/>
+          </Route>
           <Route path="/rentals/:id">
-            <RentalDetail/>
+            <RentalDetail authenticated={authenticated} rental={rental} setRental={setRental} setBookings={setBookings} bookings={bookings}/>
           </Route>
           <Route path="/signup">
             <Signup/>
+          </Route>
+          <Route path="/myrental">
+            <MyRental/>
           </Route>
           <Route path="/login">
             <Login setCurrentUser={setCurrentUser} setAuthenticated={setAuthenticated}/>
@@ -58,7 +81,7 @@ function App() {
             {/* <h1>Page Count: {count}</h1> */}
           </Route>
         </Switch>
-        <Footer/>
+        <Foot/>
       </div>
     </BrowserRouter>
   );

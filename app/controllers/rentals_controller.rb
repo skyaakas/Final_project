@@ -10,7 +10,7 @@ class RentalsController < ApplicationController
     end
     def show
         rentals = Rental.find(params[:id])
-        render json: rentals
+        render json: rentals, include: :bookings
     end
     private
     def rentals_params

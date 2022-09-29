@@ -1,17 +1,32 @@
 import React, {useEffect, useState} from 'react'
-import {useParams} from 'react-router'
+import {useParams, useHistory} from 'react-router'
+import Booking from './Booking.js';
+import { Modal, Button } from 'flowbite-react';
 
-function RentalDetail() {
 
-  const [rental, setRental] = useState({})
+
+
+function RentalDetail({authenticated, rental, setRental, bookings, setBookings}) {
+
+  // const [rental, setRental] = useState({})
   const {id} = useParams();
+  const [showModal, setShow] = useState(false);
 
+  const history = useHistory();
+  const handleClick = () =>{
+    history.push('/bookings')
+  }
+  const handleClose = () =>{ setShow(false)};
+  const handleShow = () => {
+    setShow(true)}
   
   useEffect(() => {
     fetch(`/rentals/${id}`)
     .then((res)=>res.json())
-    .then((data)=>setRental(data))
+    .then((data)=>{setRental(data);
+    setBookings(data.bookings);})
   }, [id])
+ console.log(bookings)
 
   return (
     <section class="text-gray-600 body-font">
@@ -26,8 +41,43 @@ function RentalDetail() {
       <p class="mb-8 leading-relaxed">{rental.description}</p>
       <h2>${rental.price} per day</h2>
       <div class="flex justify-center">
-        <button class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Book</button>
-        <button class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Check Availabilty</button>
+        {authenticated === true ? (
+        <button onClick={handleClick} class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Book</button>) :
+        ( <button type='button' class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none focus:ring-0 transition duration-150 ease-in-out pointer-events-none opacity-60 rounded text-lg" disabled>Book</button>)}
+        <React.Fragment>
+  <Button onClick={handleShow}>
+    Check Availability
+  </Button>
+  <Modal
+    show={showModal}
+    onClick={handleClose}
+  >
+    <Modal.Header>
+      Terms of Service
+    </Modal.Header>
+    <Modal.Body>
+      <div className="space-y-6">
+        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+          With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
+        </p>
+        <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+          The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
+        </p>
+      </div>
+    </Modal.Body>
+    <Modal.Footer>
+      <Button >
+        I accept
+      </Button>
+      <Button
+        color="gray"
+        
+      >
+        Decline
+      </Button>
+    </Modal.Footer>
+  </Modal>
+</React.Fragment>
       </div>
     </div>
   </div>

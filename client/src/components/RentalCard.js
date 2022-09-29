@@ -12,7 +12,7 @@ function RentalCard({rental}) {
   
   return (
     <div class="rounded overflow-hidden shadow-lg">
-      <img  onClick={handleClick} class="rounded-t-lg" src={rental.picture} alt="Mountain"/>
+      <img  onClick={handleClick} class="rounded-t-lg cursor-pointer" src={rental.picture} alt="Mountain"/>
       <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2">{rental.location}</div>
         <p class="text-gray-700 text-base">

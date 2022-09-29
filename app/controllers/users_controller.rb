@@ -11,13 +11,14 @@ class UsersController < ApplicationController
 
     def show
         if current_user
-            render json: current_user, status: :ok
+            render json: current_user, include: ['rentals', 'rentals.booking'], status: :ok
           else
             render json: "No current session stored", status: :unauthorized
           end
+    end
+      
     end
     private
     def user_params
         params.permit(:username, :email, :password) 
     end
-end
