@@ -7,7 +7,7 @@ const [bookUser, setBookUser] = useState(userRentals.bookings)
 
 const allBookUser = bookUser.map((bookUser)=>{
     return(
-        <UserBookingCard bookUser={bookUser} key={bookUser.id} userRentals={userRentals}/>
+        <UserBookingCard bookUser={bookUser} setBookUser={setBookUser} userRentals={userRentals}/>
     )
 })
   return (

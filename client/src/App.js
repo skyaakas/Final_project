@@ -12,6 +12,8 @@ import "./style/Footer.css"
 import MyRental from "./components/MyRental.js";
 import Foot from "./components/Foot.js";
 import UserBooking from "./components/UserBooking.js";
+import MyListings from "./components/MyListings.js";
+import CreateNewRental from "./components/CreateNewRental.js";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -57,6 +59,12 @@ function App() {
           </Route>
           <Route path="/rental">
             <Rental/>
+          </Route>
+          <Route path="/list_my_property">
+            <CreateNewRental currentUser={currentUser}/>
+          </Route>
+          <Route path="/myListings">
+            <MyListings/>
           </Route>
           <Route path="/myBookings">
             {allUserRentals}

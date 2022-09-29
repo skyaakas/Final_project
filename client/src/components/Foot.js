@@ -20,7 +20,7 @@ function Foot() {
           <Footer.Title title="about" />
           <Footer.LinkGroup col={true}>
             <Footer.Link href="#">
-              Flowbite
+              The Kotha
             </Footer.Link>
             <Footer.Link href="#">
               Tailwind CSS

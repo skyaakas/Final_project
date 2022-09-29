@@ -76,6 +76,10 @@ function Navigation({authenticated, setAuthenticated, currentUser}) {
     (<Navbar.Link href="/myBookings">
       My Bookings
     </Navbar.Link>): null}
+    {authenticated === true?
+    (<Navbar.Link href="/list_my_property">
+      List My Property
+    </Navbar.Link>): null}
     {authenticated === true? 
     null:
        (<Navbar.Link href="/login">
