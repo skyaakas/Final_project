@@ -23,12 +23,24 @@ function App() {
   const [rental, setRental] = useState({})
   const [bookings, setBookings] = useState({})
   const[userRentals, setUserRentals] = useState([])
-
+  const [ latitude, setLatitude ] = useState(null);
+  const [ longitude, setLongitude ] = useState(null)
   // useEffect(() => {
   //   fetch("/hello")
   //     .then((r) => r.json())
   //     .then((data) => setCount(data.count));
   // }, []);
+ // get the user's geolocation
+ useEffect(() => {
+  navigator.geolocation.getCurrentPosition(function(position) {
+    setLatitude(position.coords.latitude)
+    setLongitude(position.coords.longitude);
+  })
+}, [])
+
+console.log(latitude)
+
+
   useEffect(() => {
     fetch("/me").then((res) => {
       if (res.ok) {
@@ -40,6 +52,7 @@ function App() {
       }
     });
   }, []);
+  console.log(currentUser)
   const allUserRentals = userRentals.map((userRentals)=>{
     return(
         <UserBooking userRentals={userRentals} key={userRentals.id}/>
@@ -85,7 +98,7 @@ function App() {
             <Login setCurrentUser={setCurrentUser} setAuthenticated={setAuthenticated}/>
             </Route>
           <Route path="/">
-          <Home/>
+          <Home longitude={longitude} latitude={latitude}/>
             {/* <h1>Page Count: {count}</h1> */}
           </Route>
         </Switch>

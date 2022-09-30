@@ -4,7 +4,7 @@ import { Footer } from 'flowbite-react'
 
 function Foot() {
   return (
-    <Footer container={true}>
+    <Footer  className= "static bottom-0" container={true}>
   <div className="w-full">
     <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
       <div>
@@ -12,7 +12,7 @@ function Foot() {
           href="https://flowbite.com"
           src="https://flowbite.com/docs/images/logo.svg"
           alt="Flowbite Logo"
-          name="Flowbite"
+          name="The Kotha"
         />
       </div>
       <div className="grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6">
