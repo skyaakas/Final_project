@@ -11,6 +11,7 @@ function CreateNewRental({currentUser}) {
         description: "",
         price: "",
         picture: "",
+        image: null,
       });
 
       const handleChange = (event) => {
@@ -20,14 +21,36 @@ function CreateNewRental({currentUser}) {
         });
       };
 
+      const handleImage = (event) => {
+        setFormData({
+          ...formData,
+          [event.target.name]: event.target.files[0],
+        });
+        console.log(formData)
+      }
+
       const handleSubmit = ()=>{
-        const rentalCred = {...formData, user_id: currentUser.id, available: false, canshare: false}
+       
+        // const rentalCred = {...formData, user_id: currentUser.id, available: false, canshare: false}
+
+        const data = new FormData()
+
+        data.append('location', formData.location)
+        data.append('description', formData.description)
+        data.append('price', formData.price)
+        data.append('picture', formData.picture)
+        data.append('image', formData.image)
+        data.append('user_id', currentUser.id)
+        data.append('available', false)
+        data.append('canshare', false)
+
+
+
+
+
         fetch(`/rentals`,{
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(rentalCred),
+            body: data,
           }).then((res) => res.json())
             history.push('/rental')
         
@@ -86,17 +109,16 @@ function CreateNewRental({currentUser}) {
   <div>
     <div className="mb-2 block">
       <Label
-        htmlFor="picture"
+        htmlFor="image"
         value="Picture of your rental property"
       />
     </div>
     <TextInput
-    name='picture'
-      id="picture"
-      type="text"
+    name='image'
+      id="image"
+      type="file"
       required={true}
-      onChange={handleChange}
-      value={formData.picture}
+      onChange={handleImage}
     />
   </div>
   {/* <div className="flex items-center gap-2">

@@ -14,7 +14,7 @@ class RentalsController < ApplicationController
     end
     private
     def rentals_params
-        params.permit(:location, :description, :available, :price, :canshare, :picture)
+        params.permit(:location, :description, :available, :price, :canshare, :picture, :image, :user_id)
     end
 end
 

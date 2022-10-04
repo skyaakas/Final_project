@@ -38,7 +38,11 @@ function App() {
   })
 }, [])
 
-console.log(latitude)
+
+// const  {isLoaded}  = useLoadScript({
+//     googleMapsApiKey: "AIzaSyAaoCL-2NIJ8JqckeEtrGLtErNbFpps7vA"
+//   });
+
 
 
   useEffect(() => {

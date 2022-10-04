@@ -1,8 +1,40 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import { Carousel } from 'flowbite-react'
+import {GoogleMap, LoadScript, Marker} from '@react-google-maps/api'
 
 function Home({longitude, latitude}) {
+
+  const containerStyle = {
+    width: '400px',
+    height: '400px'
+  }
+
+  const center= {
+    lat: latitude,
+    lng: longitude
+  }
+
+  // const  {isLoaded}  = useLoadScript({
+  //   googleMapsApiKey: "AIzaSyAaoCL-2NIJ8JqckeEtrGLtErNbFpps7vA"
+  // });
+
+  const [map, setMap] = React.useState(null)
+
+  // const onLoad = React.useCallback(function callback(map) {
+  //   const bounds = new window.google.maps.LatLngBounds(center);
+  //   map.fitBounds(bounds);
+  //   setMap(map)
+  // }, [])
+
+  // const onUnmount = React.useCallback(function callback(map) {
+  //   setMap(null)
+  // }, [])
+ 
+  // if(!isLoaded){
+  //   return "Loading google maps"
+  // }
   return (
+    <div>
     <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
     <Carousel slideInterval={5000}>
       <img
@@ -26,9 +58,22 @@ function Home({longitude, latitude}) {
         alt="..."
       />
     </Carousel>
-
-    
   </div>
+  <div>
+    <LoadScript googleMapsApiKey="AIzaSyAaoCL-2NIJ8JqckeEtrGLtErNbFpps7vA">
+    <GoogleMap 
+  center={center}
+  zoom={15}
+  mapContainerStyle= {containerStyle}
+  // onLoad={onLoad}
+  //       onUnmount={onUnmount}
+>
+  <Marker position={center}/>
+
+</GoogleMap>
+</LoadScript>
+</div>
+</div>
   )
 }
 
